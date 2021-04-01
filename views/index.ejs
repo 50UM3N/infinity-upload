@@ -1,0 +1,24 @@
+<%- include( 'partials/header.ejs') %>
+
+<main>
+    <div class="container my-5">
+        <div class="row g-3">
+            <% assignments.forEach(assignment => { %>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://www.gstatic.com/classroom/themes/img_code.jpg" class="card-img-top" alt="..." />
+                    <div class="card-body">
+                        <a class="custom-a" href="/upload/<%= assignment.id %> ">
+                            <h5 class="card-title"><%= assignment.name %> </h5>
+                        </a>
+                        <p class="card-text">Creator: <%= assignment.creator.name %> </p>
+                        <!-- <p class="card-text">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,227 @@
+<%- include( 'partials/header.ejs') %>
+<div class="container py-5">
+    <div class="container p-0 m-0" style="max-width: 952px; ">
+        <div class="card">
+            <img style="min-height: 80px !important;" src="https://www.gstatic.com/classroom/themes/img_code.jpg"
+                class="card-img-top" alt="...">
+
+            <div class="card-body">
+                <div class="card-header-group">
+                    <h5 class="card-title" style="display: inline;"><%= assignment.name %> </h5>
+                    <% if(user.role!=='user'){ %>
+                    <a href="/assignment/delete/<%= assignment.id %>" style="display: inline; font-size: 1.25rem; "
+                        class="btn m-b"><i class="far fa-trash-alt"></i></a>
+                    <% } %>
+
+                </div>
+                <small><%= assignment.createdAt.toLocaleDateString() %> </small>
+                <hr>
+                <h6 class="bd-title"><%= assignment.description %> </h6>
+                <p><%= assignment.information %> </p>
+                <hr>
+                <% if(userPDF){ %>
+                <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1">You are already upload the file to re upload first resubmit them then upload again
+                    </h6>
+                    <small class="text-muted"><%= userPDF.createdAt.toLocaleDateString() %> </small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <div class="input-group">
+                        <div class="input-group-text">
+                            <i class="far fa-file-pdf"></i>
+                        </div>
+                        <input disabled name="name" type="text" class="form-control" value="<%= userPDF.name %>"
+                            placeholder="File name">
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <a href="/resubmit/<%=userPDF.id%>?aId=<%=assignment.id%>" style="width: 100%;"
+                            class="btn btn-outline-secondary">Resubmit</a>
+                    </div>
+                    <div class="col-md-6">
+                        <button href="#" style="width: 100%;" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                            data-bs-target="#previewModal">Preview</button>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="previewModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h6>
+                                    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+                                </h6>
+
+                                <div class="card"><canvas id="the-canvas"></canvas></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-sm"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button class="btn btn-outline-secondary btn-sm" id="prev">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" id="next">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+                <script>
+                    var url = '/files/<%= userPDF.id %>.pdf';
+                </script>
+                <script src="/js/pdf.js"></script>
+                <% }else { %>
+                <form action="/upload?aId=<%=assignment.id%>&uId=<%=user.id%> " method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <i class="far fa-file-pdf"></i>
+                            </div>
+                            <input name="name" type="text" class="form-control" placeholder="File name">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input name="file" type="file">
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Submit</button>
+                </form>
+                <% } %>
+            </div>
+        </div>
+        <% if (user.role!=='user') { %>
+        <div class="card mt-5 ">
+            <% if (allPDF.length>0) { %>
+            <div class="card-header custom-card-header">
+                <% if (zip) { %>
+                <button id="makeZipModalBtn" type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#makeZipModal">Zip</button>
+                <% }else{ %>
+                <button id="makeZipModalBtn" type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#makeZipModal">Make Zip</button>
+                <% } %>
+                <h6 class="m-0">Total <span class="badge bg-secondary"><%= allPDF.length %></span></h6>
+            </div>
+            <div class="modal fade" id="makeZipModal" tabindex="-1" aria-labelledby="makeZipModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="makeZipModalLabel">Zip</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, dolorum.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm"
+                                data-bs-dismiss="modal">Close</button>
+                            <% if (zip) { %>
+                            <a href="/zip/delete/<%= zip.id %>" type="button" id="deleteZip"
+                                class="btn btn-secondary btn-sm">Delete</a>
+                            <a href="/zip/download/<%= zip.id %>" type="button" id="makeZip"
+                                class="btn btn-secondary btn-sm">Download</a>
+
+                            <% }else{ %>
+                            <a href="javascript:void(0);" style="display: none;" type="button" id="deleteZip"
+                                class="btn btn-secondary btn-sm">Delete</a>
+                            <a href="javascript:void(0);" type="button" id="makeZip"
+                                class="btn btn-secondary btn-sm">Make</a>
+                            <button style="display: none;" id="makeZipLoading" class="btn btn-secondary btn-sm"
+                                type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Making...
+                            </button>
+                            <% } %>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h6 class="card-title mb-3">All uploads</h6>
+                <ul class="list-group">
+                    <% allPDF.forEach(file => { %>
+                    <div href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1"><%= file.uploadBy.name %></h6>
+                            <small class="text-muted"><%= file.createdAt.toLocaleDateString() %> </small>
+                        </div>
+                        <small class="text-muted"><%= file.uploadBy.email %></small>
+                    </div>
+                    <% }) %></ul>
+            </div>
+            <script>
+                const id = '<%=assignment.id%>'
+                const makeZip = document.getElementById('makeZip')
+                const loadingBtn = document.getElementById('makeZipLoading')
+                const makeZipModalBtn = document.getElementById('makeZipModalBtn')
+                const deleteZipBtn = document.getElementById('deleteZip')
+                makeZip.addEventListener('click', e => {
+                    makeZip.style.display = 'none'
+                    loadingBtn.style.display = 'block'
+                    console.log(id)
+                    fetch(`/zip/make/${id}`).then(response => {
+                        return response.json()
+                    }).then(data => {
+                        console.log(data)
+                        makeZip.style.display = 'block'
+                        makeZip.innerHTML = "Download"
+                        makeZip.setAttribute("href", data.url)
+                        loadingBtn.style.display = 'none'
+                        makeZipModalBtn.innerHTML = "Zip"
+                        deleteZipBtn.style.display = "block"
+                        deleteZipBtn.setAttribute('href', `/zip/download/${data.id}`)
+                    })
+                })
+            </script>
+            <% }else{ %>
+            <p class="text-center my-3">No one uploaded yet!!! 😒</p>
+            <% } %>
+
+        </div>
+        <% } %>
+
+    </div>
+</div>
+
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-metadata/dist/filepond-plugin-file-metadata.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-rename/dist/filepond-plugin-file-rename.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<script>
+    FilePond.registerPlugin(
+        FilePondPluginFileEncode,
+        FilePondPluginFileMetadata,
+        FilePondPluginFileRename,
+        FilePondPluginFileValidateSize);
+    const inputElement = document.querySelector('input[type="file"]');
+    const pond = FilePond.create(inputElement, {
+        allowFileRename: true,
+        fileRenameFunction: (file) => {
+            return `my_new_name${file.extension}`;
+        },
+        allowFileSizeValidation: true,
+        minFileSize: '150KB',
+        maxFileSize: "10024KB",
+        labelMaxFileSize: "Maximum file size is {filesize}",
+        allowFileTypeValidation: true,
+        acceptedFileTypes: ["application/pdf"],
+        labelFileTypeNotAllowed: "File of invalid type",
+        fileValidateTypeLabelExpectedTypes: "Expects {allButLastType} or {lastType}",
+    });
+</script>

@@ -1,0 +1,44 @@
+<%- include( '../partials/header.ejs') %>
+
+<div class="container py-5">
+    <div class="card px-3">
+        <ul class="list-group list-group-flush">
+            <% users.forEach(u => { %>
+            <% if (u.email==user.email) { return} %>
+
+            <li class="list-group-item my-list">
+                <div class="details-group">
+                    <% if (u.thumbnail==null) {  %>
+                    <img class="list-img" src="/assets/user-logo.png" alt="user-logo">
+                    <% }else{ %>
+                    <img class="list-img" src="<%= u.thumbnail %> " alt="user-logo">
+                    <% } %>
+                    <div class="text-group"><span class="u-name"><%= u.name %> <small class="text-primary">(
+                                <%= u.role %>
+                                )</small></span><span class="u-email"><%= u.email %>
+                        </span></div>
+                </div>
+                <div class="dropdown">
+                    <button type="button" class="btn m-b" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-list fa-lg"></i></button>
+                    <ul class="dropdown-menu c-dd">
+                        <% if (u.role!=="admin") { %>
+                        <li><a class="dropdown-item" href="/admin/update?role=admin&id=<%=u.id%>">Admin</a></li>
+                        <% } %>
+                        <% if (u.role!=="co-admin") { %>
+                        <li><a class="dropdown-item" href="/admin/update?role=co-admin&id=<%=u.id%>">Co-Admin</a></li>
+                        <% } %>
+                        <% if (u.role!=="user") { %>
+                        <li><a class="dropdown-item" href="/admin/update?role=user&id=<%=u.id%>">user</a></li>
+                        <% } %>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/admin/delete/<%=u.id%>">Delete</a></li>
+                    </ul>
+                </div>
+            </li>
+            <% }) %>
+        </ul>
+    </div>
+</div>

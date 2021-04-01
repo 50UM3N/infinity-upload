@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #dddddd;">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/assets/logo.svg" height="40px" alt="logo" />
+            <%= user.name %>
+        </a>
+        <div class="d-flex">
+            <% if (user.role!=="user") { %>
+            <a href="/assignment" class="btn m-b px-0 mr-4" style="font-size: 1.5rem;" data-bs-toggle="tooltip"
+                data-bs-placement="bottom" title="Add a new"><i class="fas fa-plus"></i></a>
+            <% } %>
+            <a href="/logout" class="btn m-b px-0 mr-4" style="font-size: 1.5rem;" data-bs-toggle="tooltip"
+                data-bs-placement="bottom" title="Log Out">
+                <i class="fas fa-sign-out-alt"></i></a>
+            <div class="dropdown">
+                <button type="button" class="btn m-b px-0" data-bs-toggle="dropdown" aria-expanded="false"
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="User Profile">
+                    <img class="user-logo" src="<%= (user.thumbnail!==null)?user.thumbnail:'/assets/user-logo.png'%>"
+                        alt="user-logo" />
+                </button>
+                <ul class="dropdown-menu p-0 c-dd" style="border: none;">
+                    <div class="card" style="min-width: 300px;">
+                        <div class="card-header">
+                            Details
+                        </div>
+                        <div class="card-body">
+                            <div class="user-image-container mb-3"><img class="user-image"
+                                    src="<%= (user.thumbnail!==null)?user.thumbnail:'/assets/user-logo.png'%>"
+                                    width="95" alt="user-image"></div>
+                            <h5 class="card-title text-center"><%= user.name %> </h5>
+                            <p class="card-text text-center"><small><%= user.email %></small> </p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <% if(user.role=='admin'){ %>
+                            <a class="list-group-item" href="/dashboard">Dashboard</a>
+                            <% } %>
+                            <a class="list-group-item" href="/">Home</a>
+                            <a class="list-group-item" href="/logout">Logout</a>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

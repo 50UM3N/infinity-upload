@@ -1,0 +1,141 @@
+.text-group {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.u-name {
+    font-weight: 600 !important;
+    margin-bottom: 0 !important;
+}
+
+.u-email {
+    font-size: .85rem !important;
+    color: #707071 !important;
+}
+
+.list-img {
+    width: 40px !important;
+    border-radius: 50% !important;
+    margin-right: 16px !important;
+    font-weight: bold !important;
+}
+
+.details-group {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.my-list {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+.my-list .m-b {
+    outline: none !important;
+    border: none !important;
+}
+
+.m-b:hover {
+    outline: none !important;
+    border: none !important;
+}
+
+.m-b:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.m-b {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.m-b.button {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.m-b:visited {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.m-b:active {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+}
+
+.mr-1 {
+    margin-right: .25rem !important;
+}
+
+.mr-2 {
+    margin-right: .5rem !important;
+}
+
+.mr-3 {
+    margin-right: 1rem !important;
+}
+
+.mr-4 {
+    margin-right: 1.5rem !important;
+}
+
+.mr-5 {
+    margin-right: 3rem !important;
+}
+
+i {
+    color: #707071 !important;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.btn-outline-secondary:hover i{
+    color: white !important;
+}
+.user-logo {
+    border-radius: 50% !important;
+    width: 38px !important;
+}
+
+.user-image {
+    width: 95px !important;
+    border-radius: 50% !important;
+    text-align: center !important;
+    margin: auto !important;
+}
+
+.user-image-container {
+    display: flex !important;
+    justify-content: center !important;
+}
+.c-dd{
+    left: unset !important; 
+    right: 0 !important; 
+}
+.custom-a{
+    text-decoration: none;
+    color: rgb(27, 27, 27);
+}
+.custom-a:hover{
+    text-decoration: underline;
+    color: rgb(27, 27, 27);
+}
+.filepond--credits{
+    display: none !important;
+}
+.custom-card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.card-header-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
