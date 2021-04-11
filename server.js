@@ -49,6 +49,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(require("express-flash")());
+app.use(require("./functions/no-cache"));
 
 // route middleware setting
 app.use("/", index);

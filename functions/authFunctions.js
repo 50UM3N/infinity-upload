@@ -1,5 +1,3 @@
-const ROLE = require("../models/role");
-
 const introized = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();

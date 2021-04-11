@@ -1,45 +1,117 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid #dddddd;">
+<nav class="navbar">
     <div class="container">
-        <a class="navbar-brand" href="/">
-            <img src="/assets/logo.svg" height="40px" alt="logo" />
-            <%= user.name %>
+        <a href="/" class="nav-brand">
+            <img src="/assets/logo.svg" height="34px" alt="image">
         </a>
-        <div class="d-flex">
-            <% if (user.role!=="user") { %>
-            <a href="/assignment" class="btn m-b px-0 mr-4" style="font-size: 1.5rem;" data-bs-toggle="tooltip"
-                data-bs-placement="bottom" title="Add a new"><i class="fas fa-plus"></i></a>
+        <div class="nav-element-container">
+            <!-- <p class="navbar-date"></p> -->
+            <!-- <div class="navbar-item">
+                <a href="javascript:void(0);" class="navbar-item-element">
+                    <ion-icon name="help-circle-outline"></ion-icon>
+                </a>
+            </div>
+            <div class="navbar-item">
+                <a href="javascript:void(0);" class="navbar-item-element">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                </a>
+            </div>
+            <div class="navbar-item dropdown">
+                <a href="javascript:void(0);" class="navbar-item-element">
+                    <ion-icon name="settings-outline"></ion-icon>
+                </a>
+
+            </div> -->
+            <% if (user.role!=="user" ) { %>
+            <div class="navbar-item dropdown">
+                <a href="javascript:void(0);" class="navbar-item-element">
+                    <ion-icon name="add-outline"></ion-icon>
+                </a>
+                <div class="dropdown-menu">
+                    <ul class="dropdown-list">
+                        <a href="/assignment">Add Assignment</a>
+                        <a href="#">Delete Assignment</a>
+                    </ul>
+                </div>
+            </div>
             <% } %>
-            <a href="/logout" class="btn m-b px-0 mr-4" style="font-size: 1.5rem;" data-bs-toggle="tooltip"
-                data-bs-placement="bottom" title="Log Out">
-                <i class="fas fa-sign-out-alt"></i></a>
-            <div class="dropdown">
-                <button type="button" class="btn m-b px-0" data-bs-toggle="dropdown" aria-expanded="false"
-                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="User Profile">
-                    <img class="user-logo" src="<%= (user.thumbnail!==null)?user.thumbnail:'/assets/user-logo.png'%>"
-                        alt="user-logo" />
-                </button>
-                <ul class="dropdown-menu p-0 c-dd" style="border: none;">
-                    <div class="card" style="min-width: 300px;">
-                        <div class="card-header">
-                            Details
-                        </div>
-                        <div class="card-body">
-                            <div class="user-image-container mb-3"><img class="user-image"
-                                    src="<%= (user.thumbnail!==null)?user.thumbnail:'/assets/user-logo.png'%>"
-                                    width="95" alt="user-image"></div>
-                            <h5 class="card-title text-center"><%= user.name %> </h5>
-                            <p class="card-text text-center"><small><%= user.email %></small> </p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <% if(user.role=='admin'){ %>
-                            <a class="list-group-item" href="/dashboard">Dashboard</a>
-                            <% } %>
-                            <a class="list-group-item" href="/">Home</a>
-                            <a class="list-group-item" href="/logout">Logout</a>
-                        </ul>
+
+            <div href="#" class="navbar-item dropdown">
+                <a href="javscript:void(0);" class="navbar-item-element">
+                    <img src="<%= (user.thumbnail!==null)?user.thumbnail:'/assets/user-logo.png'%>" alt="">
+                </a>
+                <div class="dropdown-menu user-menu">
+                    <a href="#" class="user-wrapper">
+                        <img src="<%= (user.thumbnail!==null)?user.thumbnail:'/assets/user-logo.png'%>"
+                            alt="user image">
+                        <p class="user-name">
+                            <%= user.name %>
+                        </p>
+                        <p class="user-email">
+                            <%= user.email %></small>
+                        </p>
+                    </a>
+                    <ul class="dropdown-list">
+                        <% if(user.role=='admin' ){ %>
+                        <a href="/dashboard" class="list-group-item">
+                            <ion-icon name="bookmarks-outline"></ion-icon>
+                            <span>Settings</span>
+                        </a>
+                        <% } %>
+                        <a href="/" class="list-group-item">
+                            <ion-icon name="bookmarks-outline"></ion-icon>
+                            <span>Home</span>
+                        </a>
+                        <a class="list-group-item" href="/logout">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                            <span>Log Out</span>
+                        </a>
+                    </ul>
+                    <div class="t-and-c">
+                        <a class="t-and-c" href="">Privacy Policy</a><span>•</span><a class="t-and-c" href="">Terms
+                            of Service</a>
                     </div>
-                </ul>
+                </div>
             </div>
         </div>
     </div>
 </nav>
+<script>
+
+    const customDate = () => {
+        const d = new Date();
+        const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ]
+        const days = [
+            'Sun',
+            'Mon',
+            'Tue',
+            'Wed',
+            'Thu',
+            'Fri',
+            'Sat'
+        ]
+        const date = `${days[d.getDay()]},${months[d.getMonth()]} ${d.getDate()}`
+        var hours = d.getHours();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        const time = `${hours}:${d.getMinutes()} ${ampm}`
+        return `${time} <span>•</span> ${date}`
+    }
+    const datePara = document.querySelector('.navbar-date')
+    datePara.innerHTML = customDate()
+    setInterval(() => { datePara.innerHTML = customDate() }, 30 * 1000)
+    // datePara.innerHTML = customDate()
+</script>

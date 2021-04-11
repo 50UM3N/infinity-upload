@@ -2,8 +2,9 @@ const express = require("express");
 const route = express.Router();
 const user = require("../../models/user");
 const ROLE = require("../../models/role");
-const { permit } = require("../../functions/authFunctions");
+const { permit, authorize } = require("../../functions/authFunctions");
 
+route.use(authorize);
 route.use(permit(ROLE.ADMIN));
 
 route.get("/", async (req, res) => {

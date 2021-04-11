@@ -1,0 +1,39 @@
+<%- include( 'partials/header.ejs') %>
+
+<div class="container py-5" style="display: flex; justify-content: center;">
+    <div class="card" style="width: 952px;">
+        <img src="https://www.gstatic.com/classroom/themes/img_code.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title"><%= locals.assignment?(assignment.name):("Create a new assignment") %> </h5>
+            <p class="card-subtitle">This is a subtitle</p>
+            <form action="/assignment/<%= locals.assignment?("update/"+assignment.id):(user.id) %>" method="POST">
+                <div class="input-group leading mb-3">
+                    <input name="name" value="<%= locals.assignment?(assignment.name):("") %>" required
+                        class="form-control" type="text">
+                    <label class="form-label">Assignment name</label>
+                    <div class="leading-icon">
+                        <ion-icon name="heart-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="input-group leading mb-3">
+                    <input name="description" value="<%= locals.assignment?(assignment.description):("") %>" required
+                        class="form-control" type="text">
+                    <label class="form-label">Assignment desecration</label>
+                    <div class="leading-icon">
+                        <ion-icon name="heart-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="input-group leading mb-3">
+                    <input name="information" value="<%= locals.assignment?(assignment.information):("") %>" required
+                        class="form-control" type="text">
+                    <label class="form-label">Assignment information</label>
+                    <div class="leading-icon">
+                        <ion-icon name="heart-outline"></ion-icon>
+                    </div>
+                </div>
+                <button style="width: 100%;" type="submit"
+                    class="btn btn-outline"><%= locals.assignment?("Update"):("Create") %></button>
+            </form>
+        </div>
+    </div>
+</div>

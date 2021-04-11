@@ -5,13 +5,13 @@ const zipSchema = require("../models/zip");
 const file = require("../models/file");
 const fs = require("fs");
 const ROLE = require("../models/role");
+const { permit, authorize } = require("../functions/authFunctions");
 
-const { permit } = require("../functions/authFunctions");
-
+route.use(authorize);
 route.use(permit([ROLE.ADMIN, ROLE.CO_ADMIN]));
 
 route.get("/", (req, res) => {
-  res.render("createAssignment.ejs", { user: req.user });
+  res.render("assignment.ejs", { user: req.user });
 });
 
 route.post("/:id", async (req, res) => {
@@ -22,7 +22,26 @@ route.post("/:id", async (req, res) => {
     information: information,
     creator: req.params.id,
   }).save();
-  res.redirect("/assignment");
+  res.redirect("/");
+});
+
+route.get("/edit/:id", async (req, res) => {
+  const currentAssignment = await assignment.findById(req.params.id).exec();
+  if (!currentAssignment) return res.redirect("/");
+  res.render("assignment.ejs", {
+    user: req.user,
+    assignment: currentAssignment,
+  });
+});
+
+route.post("/update/:id", async (req, res) => {
+  const { name, description, information } = req.body;
+  await assignment.findByIdAndUpdate(req.params.id, {
+    name: name,
+    description: description,
+    information: information,
+  });
+  res.redirect(`/upload/${req.params.id}`);
 });
 
 route.get("/delete/:id", async (req, res) => {

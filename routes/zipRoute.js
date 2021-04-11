@@ -4,7 +4,10 @@ const file = require("../models/file");
 const AdmZip = require("adm-zip");
 const zipSchema = require("../models/zip");
 const fs = require("fs");
+const { authorize } = require("../functions/authFunctions");
 
+route.use(authorize);
+route.use(require("../functions/no-cache"));
 route.use(express.json());
 
 route.get("/make/:id", async (req, res) => {
@@ -22,7 +25,10 @@ route.get("/make/:id", async (req, res) => {
   zip.writeZip(`${newZip.location}/${newZip._id}.${newZip.type}`);
   newZip.save();
 
-  res.json({ url: `/zip/download/${newZip.id}` });
+  res.json({
+    downloadUrl: `/zip/download/${newZip.id}`,
+    deleteUrl: `/zip/delete/${newZip.id}`,
+  });
 });
 
 route.get("/download/:id", async (req, res) => {

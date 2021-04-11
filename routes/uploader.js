@@ -4,10 +4,12 @@ const file = require("../models/file");
 const assignment = require("../models/assignment");
 const zipSchema = require("../models/zip");
 const fs = require("fs");
+const { authorize } = require("../functions/authFunctions");
 
+route.use(authorize);
 route.get("/:id", async (req, res) => {
   const currentAssignment = await assignment.findById(req.params.id).exec();
-
+  if (!currentAssignment) return res.redirect("/");
   const allPDF = await file
     .find({ for: req.params.id })
     .populate("uploadBy")

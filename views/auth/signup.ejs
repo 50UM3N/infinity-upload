@@ -6,53 +6,47 @@
             <p class="m-0">Login Form</p><a href="/login" type="button" class="btn btn-outline-success">login</a>
         </div>
         <div class="card-body">
-            <a href="/auth/google" type="button" style="width: 100%;" class="btn btn-outline-secondary  mb-3"><i
-                    class="fab fa-google"></i> Google</a>
+            <a href="/auth/google" type="button" style="width: 100%;" class="btn btn-outline btn-group  mb-3">
+                <ion-icon name="logo-google"></ion-icon> <span>Google</span>
+            </a>
             <form action="/signup" method="POST">
                 <% if(locals.messages.successMsg){ %>
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success">
                     <%= locals.messages.successMsg %>
                 </div>
                 <% } %>
                 <% if(locals.messages.errorMsg){ %>
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger">
                     <%= locals.messages.errorMsg %>
                 </div>
                 <% } %>
 
-                <div class="mb-3">
-                    <label class="form-label">Name</label>
-                    <div class="input-group">
-                        <div class="input-group-text">
-                            <ion-icon name="person-outline"></ion-icon>
-                        </div>
-                        <input name="name" type="text" class="form-control" id="autoSizingInputGroup"
-                            placeholder="Full Name">
+                <div class="mb-3 input-group leading">
+                    <input name="name" required class="form-control" type="text">
+                    <label class="form-label">Full Name</label>
+                    <div class="leading-icon">
+                        <ion-icon name="heart-outline"></ion-icon>
                     </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 input-group leading">
+                    <input name="email" required class="form-control" type="text">
                     <label class="form-label">Email</label>
-                    <div class="input-group">
-                        <div class="input-group-text">
-                            <ion-icon name="mail-outline"></ion-icon>
-                        </div>
-                        <input name="email" type="email" class="form-control" id="autoSizingInputGroup"
-                            placeholder="Your Email" aria-describedby="emailHelp">
+                    <div class="leading-icon">
+                        <ion-icon name="heart-outline"></ion-icon>
                     </div>
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                    <div class="form-helper">
+                        <span class="helper-text">Helper Message</span>
+                        <span class="number-count">20/20</span>
                     </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 input-group leading">
+                    <input name="password" required class="form-control" type="password">
                     <label class="form-label">Password</label>
-                    <div class="input-group">
-                        <div class="input-group-text">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </div>
-                        <input name="password" type="password" class="form-control" id="autoSizingInputGroup"
-                            placeholder="Password">
+                    <div class="leading-icon">
+                        <ion-icon name="heart-outline"></ion-icon>
                     </div>
                 </div>
-                <button style="width: 100%;" type="submit" class="btn btn-primary">Sign Up</button>
+                <button style="width: 100%;" type="submit" class="btn btn-outline">Sign Up</button>
             </form>
         </div>
     </div>

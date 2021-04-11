@@ -3,6 +3,8 @@ const route = express.Router();
 const user = require("../../models/user");
 const { notAuthorize } = require("../../functions/authFunctions");
 
+route.use(require("../../functions/no-cache"));
+
 route.get("/", notAuthorize, (req, res) => {
   res.render("auth/signup.ejs");
 });
