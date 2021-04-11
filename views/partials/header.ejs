@@ -1,26 +1,26 @@
 <nav class="navbar">
-    <div class="container">
-        <a href="/" class="nav-brand">
+    <div class="container-fluid">
+        <a href="/" class="nav-brand ">
             <img src="/assets/logo.svg" height="34px" alt="image">
         </a>
         <div class="nav-element-container">
-            <!-- <p class="navbar-date"></p> -->
-            <!-- <div class="navbar-item">
+            <p class="navbar-date 😜"></p>
+            <div class="navbar-item 😜">
                 <a href="javascript:void(0);" class="navbar-item-element">
                     <ion-icon name="help-circle-outline"></ion-icon>
                 </a>
             </div>
-            <div class="navbar-item">
+            <div class="navbar-item 😜">
                 <a href="javascript:void(0);" class="navbar-item-element">
                     <ion-icon name="information-circle-outline"></ion-icon>
                 </a>
             </div>
-            <div class="navbar-item dropdown">
+            <div class="navbar-item 😜">
                 <a href="javascript:void(0);" class="navbar-item-element">
                     <ion-icon name="settings-outline"></ion-icon>
                 </a>
 
-            </div> -->
+            </div>
             <% if (user.role!=="user" ) { %>
             <div class="navbar-item dropdown">
                 <a href="javascript:void(0);" class="navbar-item-element">
@@ -75,6 +75,14 @@
         </div>
     </div>
 </nav>
+<style>
+    @media (max-width:700px) {
+        .😜 {
+            display: none;
+            pointer-events: none;
+        }
+    }
+</style>
 <script>
 
     const customDate = () => {
