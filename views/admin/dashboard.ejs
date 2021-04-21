@@ -18,8 +18,8 @@
                     <span><%= u.email %></span>
                 </div>
             </div>
-            <div class="after-list-element btn-icon dropdown">
-                <a href="#">
+            <div class="after-list-element  dropdown">
+                <a href="#" class="btn-icon">
                     <ion-icon name="ellipsis-vertical-outline"></ion-icon>
                 </a>
                 <div class="dropdown-menu" style="min-width:150px;">
@@ -27,7 +27,7 @@
                         <% if (u.role!=="admin") { %>
                         <a href="/admin/update?role=admin&id=<%=u.id%>">Admin</a>
                         <% } %>
-                        <% if (u.role!=="co-admin") { %>
+                        <% if (u.role!=="co_admin") { %>
                         <a href="/admin/update?role=co-admin&id=<%=u.id%>">Co-Admin</a>
                         <% } %>
                         <% if (u.role!=="user") { %>
