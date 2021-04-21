@@ -212,3 +212,21 @@ nav.navbar {
     --alert-border-color: #f5c2c7;
 
 }
+
+.auth-or {
+    margin: 24px auto;
+    position: relative;
+    width: calc(100% - 100px);
+    border-bottom: 1px solid var(--border-color);
+
+    &::before {
+        content: "or";
+        color: var(--text-color-secondary);
+        position: absolute;
+        top: -9px;
+        right: 50%;
+        transform: translateX(calc(-50% + 32px));
+        background-color: white;
+        padding: 0rem 1rem;
+    }
+}

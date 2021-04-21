@@ -1,14 +1,16 @@
 <div class="container py-5"
     style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
-    <h3 class="text-center mb-3">Register Batch Upload</h3>
+    <img class="mb-2" src="/assets/logo.svg" height="50px" alt="Infinity Logo">
+    <h3 class="text-center text-secondary mb-3">Create your Infinity Account</h3>
     <div class="card" style="width:100%; max-width: 35rem;">
         <div style="display: flex; justify-content: space-between; align-items: center;" class="card-header">
-            <p class="m-0">Login Form</p><a href="/login" type="button" class="btn btn-outline-success">login</a>
+            <p class="m-0">Infinity Upload</p><a href="/login" type="button" class="btn btn-non-outline">Sign In</a>
         </div>
         <div class="card-body">
-            <a href="/auth/google" type="button" style="width: 100%;" class="btn btn-outline btn-group  mb-3">
+            <a href="/auth/google" type="button" style="width: 100%;" class="btn btn-outline btn-group">
                 <ion-icon name="logo-google"></ion-icon> <span>Google</span>
             </a>
+            <div class="auth-or"></div>
             <form action="/signup" method="POST">
                 <% if(locals.messages.successMsg){ %>
                 <div class="alert alert-success">
@@ -25,35 +27,31 @@
                     <input name="name" required class="form-control" type="text">
                     <label class="form-label">Full Name</label>
                     <div class="leading-icon">
-                        <ion-icon name="heart-outline"></ion-icon>
+                        <ion-icon name="person"></ion-icon>
                     </div>
                 </div>
                 <div class="mb-3 input-group leading">
                     <input name="email" required class="form-control" type="text">
                     <label class="form-label">Email</label>
                     <div class="leading-icon">
-                        <ion-icon name="heart-outline"></ion-icon>
+                        <ion-icon name="mail"></ion-icon>
                     </div>
                     <div class="form-helper">
-                        <span class="helper-text">Helper Message</span>
-                        <span class="number-count">20/20</span>
+                        <span class="helper-text">We'll never share your email with anyone else.</span>
                     </div>
                 </div>
-                <div class="mb-3 input-group leading">
+                <div class="mb-3 input-group leading trailing">
                     <input name="password" required class="form-control" type="password">
                     <label class="form-label">Password</label>
                     <div class="leading-icon">
-                        <ion-icon name="heart-outline"></ion-icon>
+                        <ion-icon name="paw"></ion-icon>
                     </div>
+                    <button show-password class="trailing-icon btn-icon">
+                        <ion-icon name="eye"></ion-icon>
+                    </button>
                 </div>
-                <button style="width: 100%;" type="submit" class="btn btn-outline">Sign Up</button>
+                <button style="width: 100%;" type="submit" class="btn btn-outline">Create</button>
             </form>
         </div>
     </div>
 </div>
-
-<style>
-    body {
-        background-color: #F5F5F5;
-    }
-</style>

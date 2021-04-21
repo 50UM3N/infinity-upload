@@ -16,7 +16,25 @@
 
 <body>
     <%- body %>
-
+    <script>
+        const showPasswords = document.querySelectorAll('button[show-password]')
+        if (showPasswords.length > 0) {
+            showPasswords.forEach(showPassword => {
+                showPassword.addEventListener('click', e => {
+                    e.preventDefault();
+                    const input = showPassword.parentElement.querySelector('.form-control');
+                    const type = input.getAttribute('type') == 'password' ? 'text' : 'password'
+                    const icon = type !== 'password' ? `<ion-icon name="eye-off"></ion-icon>` : `<ion-icon name="eye"></ion-icon>`
+                    console.log(showPassword.innerHTML)
+                    if (input.value) {
+                        showPassword.innerHTML = icon
+                        input.setAttribute("type", type);
+                    }
+                })
+            })
+        }
+        console.log()
+    </script>
     <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
 </body>

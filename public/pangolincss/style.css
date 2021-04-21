@@ -1685,6 +1685,14 @@ input[disabled] {
           transform: translate(50%, -50%);
 }
 
+.trailing button.trailing-icon {
+  width: 40px;
+  height: 40px;
+  right: 24px;
+  pointer-events: all;
+  color: var(--text-color-secondary);
+}
+
 .modal-open {
   overflow: hidden;
   margin-right: 16px !important;
@@ -2012,5 +2020,24 @@ nav.navbar .user-wrapper p.user-email {
   --alert-color: #842029;
   --alert-background-color: #f8d7da;
   --alert-border-color: #f5c2c7;
+}
+
+.auth-or {
+  margin: 24px auto;
+  position: relative;
+  width: calc(100% - 100px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.auth-or::before {
+  content: "or";
+  color: var(--text-color-secondary);
+  position: absolute;
+  top: -9px;
+  right: 50%;
+  -webkit-transform: translateX(calc(-50% + 32px));
+          transform: translateX(calc(-50% + 32px));
+  background-color: white;
+  padding: 0rem 1rem;
 }
 /*# sourceMappingURL=style.css.map */

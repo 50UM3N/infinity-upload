@@ -12,7 +12,7 @@
                         class="form-control" type="text">
                     <label class="form-label">Assignment name</label>
                     <div class="leading-icon">
-                        <ion-icon name="heart-outline"></ion-icon>
+                        <ion-icon name="book"></ion-icon>
                     </div>
                 </div>
                 <div class="input-group leading mb-3">
@@ -20,15 +20,15 @@
                         class="form-control" type="text">
                     <label class="form-label">Assignment desecration</label>
                     <div class="leading-icon">
-                        <ion-icon name="heart-outline"></ion-icon>
+                        <ion-icon name="extension-puzzle"></ion-icon>
                     </div>
                 </div>
                 <div class="input-group leading mb-3">
-                    <input name="information" value="<%= locals.assignment?(assignment.information):("") %>" required
-                        class="form-control" type="text">
+                    <textarea rows="50" name="information" required class="form-control"
+                        type="text"><%= locals.assignment?(assignment.information):("") %></textarea>
                     <label class="form-label">Assignment information</label>
                     <div class="leading-icon">
-                        <ion-icon name="heart-outline"></ion-icon>
+                        <ion-icon name="flame"></ion-icon>
                     </div>
                 </div>
                 <button style="width: 100%;" type="submit"
