@@ -1,34 +1,34 @@
 const introized = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  return res.redirect("/intro");
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    return res.redirect("/intro");
 };
 
 const authorize = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  return res.redirect("/login");
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    return res.redirect("/login");
 };
 
 const notAuthorize = (req, res, next) => {
-  if (!req.isAuthenticated()) {
-    return next();
-  }
-  return res.redirect("/");
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+    return res.redirect("/");
 };
 
 const permit = (roles) => {
-  return (req, res, next) => {
-    if (roles.includes(req.user.role)) return next();
-    return res.redirect("/");
-  };
+    return (req, res, next) => {
+        if (roles.includes(req.user.role)) return next();
+        return res.redirect("/");
+    };
 };
 
 module.exports = {
-  authorize,
-  notAuthorize,
-  introized,
-  permit,
+    authorize,
+    notAuthorize,
+    introized,
+    permit,
 };

@@ -8,8 +8,12 @@ route.use(authorize);
 route.use(permit(ROLE.ADMIN));
 
 route.get("/", async (req, res) => {
-  const users = await user.find().exec();
-  res.render("admin/dashboard.ejs", { users: users, user: req.user });
+    const users = await user.find().exec();
+    res.render("admin/dashboard.ejs", {
+        page_title: "Dashboard",
+        users: users,
+        user: req.user,
+    });
 });
 
 module.exports = route;

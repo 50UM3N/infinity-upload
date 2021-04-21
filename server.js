@@ -8,8 +8,8 @@ const mongoose = require("mongoose");
 // custom modules
 const user = require("./models/user");
 const {
-  passportAuthenticator,
-  googleAuthenticator,
+    passportAuthenticator,
+    googleAuthenticator,
 } = require("./strategies/passportLocalStrategies");
 const index = require("./routes/index");
 const login = require("./routes/auth/login");
@@ -22,14 +22,14 @@ const assignmentRoute = require("./routes/assignmentRoute");
 const uploader = require("./routes/uploader");
 
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => {
-    console.log("database connected");
-  });
+    .connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+    })
+    .then(() => {
+        console.log("database connected");
+    });
 
 googleAuthenticator(passport, user);
 passportAuthenticator(passport, user);
@@ -41,10 +41,10 @@ app.use(require("express-ejs-layouts"));
 app.set("view engine", "ejs");
 app.set("layout", "layouts/main");
 app.use(
-  cookie({
-    maxAge: 30 * 60 * 60 * 1000,
-    keys: ["soumenkhara"],
-  })
+    cookie({
+        maxAge: 30 * 60 * 60 * 1000,
+        keys: ["soumenkhara"],
+    })
 );
 app.use(passport.initialize());
 app.use(passport.session());
@@ -65,5 +65,5 @@ app.use("/resubmit", require("./routes/resubmit"));
 app.use("/zip", require("./routes/zipRoute"));
 
 app.listen(process.env.PORT || 8080, () => {
-  console.log("Server started on port 8080");
+    console.log("Server started on port 8080");
 });

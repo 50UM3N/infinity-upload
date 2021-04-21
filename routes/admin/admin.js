@@ -8,13 +8,13 @@ route.use(authorize);
 route.use(permit(ROLE.ADMIN));
 
 route.get("/delete/:id", async (req, res) => {
-  await user.findByIdAndDelete(req.params.id).exec();
-  res.redirect("/dashboard");
+    await user.findByIdAndDelete(req.params.id).exec();
+    res.redirect("/dashboard");
 });
 route.get("/update", async (req, res) => {
-  const { role, id } = req.query;
-  await user.findByIdAndUpdate(id, { role: role }).exec();
-  res.redirect("/dashboard");
+    const { role, id } = req.query;
+    await user.findByIdAndUpdate(id, { role: role }).exec();
+    res.redirect("/dashboard");
 });
 
 module.exports = route;

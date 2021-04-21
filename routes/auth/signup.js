@@ -6,26 +6,26 @@ const { notAuthorize } = require("../../functions/authFunctions");
 route.use(require("../../functions/no-cache"));
 
 route.get("/", notAuthorize, (req, res) => {
-  res.render("auth/signup.ejs");
+    res.render("auth/signup.ejs", { page_title: "Sign Up" });
 });
 
 route.post("/", async (req, res) => {
-  const { name, email, password } = req.body;
+    const { name, email, password } = req.body;
 
-  const userData = await user.findOne({ email: email }).exec();
-  if (userData) {
-    req.flash("errorMsg", "User Already exist");
+    const userData = await user.findOne({ email: email }).exec();
+    if (userData) {
+        req.flash("errorMsg", "User Already exist");
+        res.redirect("/signup");
+    } else {
+        await user({
+            name: name,
+            email: email,
+            password: password,
+            role: "user",
+        }).save();
+    }
+    req.flash("successMsg", "Signup successful");
     res.redirect("/signup");
-  } else {
-    await user({
-      name: name,
-      email: email,
-      password: password,
-      role: "user",
-    }).save();
-  }
-  req.flash("successMsg", "Signup successful");
-  res.redirect("/signup");
 });
 
 module.exports = route;
